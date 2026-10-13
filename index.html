@@ -356,16 +356,17 @@ footer{padding:16px 0 27px;color:var(--muted);font-size:.71rem;display:flex;just
 }
 .research-map-gif{
   display:block;
-  width:min(100%,500px);
-  height:auto;
+  width:auto;
+  max-width:100%;
+  height:500px;
   object-fit:contain;
   border:1px solid var(--line);
   border-radius:14px;
   background:#fff;
 }
-@media(max-width:680px){
+@media(max-width:980px){
   .hero-grid{grid-template-columns:1fr}
-  .map-gif-card{max-width:460px}
+  .map-gif-card{max-width:760px}
   }
 @media(max-width:720px){
   .hero{padding-top:23px}
