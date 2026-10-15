@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Habitat Mapping of Cox's Bazar, Maheshkhali Island and Kutubdia | Fariha Aktar</title>
+<meta name="description" content="Applied habitat mapping project for Cox's Bazar, Maheshkhali Island and Kutubdia, prepared as part of the Master Plan Preparation of Cox's Bazar District.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#17211b;
+  --muted:#667068;
+  --green:#2b654b;
+  --green-dark:#1d4935;
+  --soft:#f6f8f6;
+  --line:#dce3dd;
+  --line-dark:#c6d0c8;
+  --shadow:0 14px 38px rgba(27,49,36,.07);
+  --max:1400px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#fff;
+  color:var(--ink);
+  font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit}
+.wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
+.eyebrow{
+  color:var(--green);
+  font-size:.69rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+}
+
+/* Navigation */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  min-height:66px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.brand{
+  font-family:"Source Serif 4",serif;
+  font-weight:700;
+  font-size:1.08rem;
+}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-link{font-size:.82rem;font-weight:700;color:#536058}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:0 16px;
+  border-radius:999px;
+  border:1px solid var(--line-dark);
+  background:#fff;
+  font-size:.82rem;
+  font-weight:700;
+}
+.btn.primary{
+  background:var(--green);
+  border-color:var(--green);
+  color:#fff;
+}
+
+/* Hero */
+.hero{
+  width:min(1400px,calc(100% - 36px));
+  margin-left:auto;
+  margin-right:auto;
+  padding:24px 0 14px;
+  display:grid;
+  grid-template-columns:minmax(0,.76fr) minmax(660px,1.24fr);
+  gap:22px;
+  align-items:start;
+}
+.hero > div:first-child{min-width:0;padding-top:2px}
+h1,h2,h3{
+  font-family:"Source Serif 4",Georgia,serif;
+  letter-spacing:-.025em;
+}
+h1{
+  font-size:29px;
+  line-height:1.14;
+  margin:8px 0 12px;
+}
+h2{font-size:24px;line-height:1.2;margin:5px 0 0}
+h3{font-size:1rem;margin:0}
+.hero-copy{
+  margin:0;
+  color:var(--muted);
+  max-width:620px;
+  font-size:.88rem;
+  line-height:1.52;
+}
+.hero-focus-line{
+  margin-top:14px;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:72px 1fr;
+  gap:10px;
+}
+.hero-focus-line strong{
+  color:var(--green);
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  font-size:.66rem;
+}
+.hero-focus-line span{
+  color:var(--muted);
+  font-size:.74rem;
+  line-height:1.45;
+}
+
+/* Compact metadata in left blank space */
+.hero-left-summary{
+  margin-top:16px;
+  border-top:1px solid var(--line-dark);
+  border-bottom:1px solid var(--line-dark);
+  display:grid;
+  grid-template-columns:.78fr 1.22fr;
+}
+.hero-left-summary-item{
+  padding:12px 12px 12px 0;
+  min-width:0;
+}
+.hero-left-summary-item:nth-child(2){
+  border-left:1px solid var(--line);
+  padding-left:12px;
+}
+.hero-left-summary-item:nth-child(3){
+  grid-column:1/-1;
+  border-top:1px solid var(--line);
+  padding:12px 0;
+}
+.hero-left-summary-item small{
+  display:block;
+  color:var(--green);
+  font-size:.57rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  margin-bottom:3px;
+}
+.hero-left-summary-item strong{
+  display:block;
+  font-size:.69rem;
+  line-height:1.38;
+}
+
+/* Top-right image slider - 2 images per slide */
+.hero-map-panel{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:var(--shadow);
+}
+.hero-map-head{
+  min-height:52px;
+  padding:9px 14px;
+  border-bottom:1px solid var(--line);
+  background:var(--soft);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.hero-map-head strong{
+  display:block;
+  font-family:"Source Serif 4",Georgia,serif;
+  font-size:1.04rem;
+  margin-top:2px;
+}
+.hero-map-count{
+  color:var(--muted);
+  font-size:.72rem;
+  font-weight:700;
+}
+.hero-map-slider{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) 34px;
+  gap:8px;
+  align-items:center;
+  padding:10px 10px 11px;
+}
+.hero-map-viewport{width:100%;overflow:hidden}
+.hero-map-track{
+  display:flex;
+  gap:14px;
+  width:100%;
+  transition:transform .42s cubic-bezier(.22,.61,.36,1);
+  will-change:transform;
+}
+.hero-map-card{
+  flex:0 0 calc((100% - 14px)/2);
+  width:calc((100% - 14px)/2);
+  min-width:0;
+  appearance:none;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:0;
+  overflow:hidden;
+  background:#fff;
+  text-align:left;
+  cursor:zoom-in;
+}
+.hero-map-card img{
+  width:100%;
+  height:365px;
+  object-fit:contain;
+  object-position:center;
+  background:#fff;
+  padding:4px;
+  border-bottom:1px solid var(--line);
+}
+.hero-map-card > span{
+  display:block;
+  padding:10px 12px 12px;
+  min-height:74px;
+}
+.hero-map-card > span strong{
+  display:block;
+  font-family:"Source Serif 4",Georgia,serif;
+  font-size:.91rem;
+  line-height:1.22;
+  margin-bottom:3px;
+}
+.hero-map-card > span small{
+  display:block;
+  color:var(--muted);
+  font-size:.63rem;
+  line-height:1.35;
+}
+.hero-slide{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid var(--line-dark);
+  background:#fff;
+  color:var(--green-dark);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  font:1.45rem Georgia,serif;
+}
+.hero-slide:hover{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green);
+}
+.hero-slide:disabled{
+  opacity:.28;
+  cursor:default;
+  background:#fff;
+  color:var(--muted);
+}
+
+/* Sections */
+.section{padding:30px 0 5px}
+.section-head{margin-bottom:17px}
+.project-context{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--line-dark);
+  border-bottom:1px solid var(--line-dark);
+}
+.context-block{padding:18px 22px 18px 0}
+.context-block + .context-block{
+  border-left:1px solid var(--line);
+  padding-left:22px;
+}
+.context-block p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:.83rem;
+}
+
+/* Workflow */
+.workflow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line-dark);
+}
+.workflow-step{
+  padding:18px 18px 4px 0;
+  margin-right:18px;
+  border-right:1px solid var(--line);
+}
+.workflow-step:last-child{
+  border-right:0;
+  margin-right:0;
+}
+.workflow-step .number{
+  display:block;
+  color:var(--green);
+  font-size:.64rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  margin-bottom:6px;
+}
+.workflow-step strong{
+  display:block;
+  font-family:"Source Serif 4",serif;
+  font-size:.98rem;
+  margin-bottom:5px;
+}
+.workflow-step p{
+  margin:0;
+  color:var(--muted);
+  font-size:.75rem;
+}
+
+/* Contribution */
+.contribution-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.contribution{
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:17px;
+}
+.contribution strong{
+  display:block;
+  font-family:"Source Serif 4",serif;
+  margin:5px 0;
+}
+.contribution p{
+  margin:0;
+  color:var(--muted);
+  font-size:.76rem;
+}
+
+/* Outcome */
+.outcome{
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:20px;
+  background:var(--soft);
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:22px;
+  align-items:start;
+}
+.outcome strong{
+  font-family:"Source Serif 4",serif;
+  font-size:1.05rem;
+}
+.outcome p{
+  margin:0;
+  color:var(--muted);
+  font-size:.82rem;
+}
+
+/* Modal */
+.image-modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(12,20,15,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  backdrop-filter:blur(5px);
+}
+.image-modal.open{display:flex}
+.image-dialog{
+  width:min(1450px,97vw);
+  height:min(95vh,1100px);
+  background:#fff;
+  border-radius:15px;
+  overflow:hidden;
+  display:grid;
+  grid-template-rows:auto 1fr;
+}
+.image-bar{
+  min-height:50px;
+  padding:7px 10px 7px 16px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.image-title{font-size:.84rem;font-weight:700}
+.image-close{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#fff;
+  border:1px solid var(--line);
+  cursor:pointer;
+  font-size:1.2rem;
+}
+.image-stage{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  overflow:auto;
+  background:#f7f8f7;
+}
+.image-stage img{max-width:100%;max-height:100%;object-fit:contain}
+
+.back{
+  margin:48px auto 28px;
+  padding-top:26px;
+  border-top:1px solid var(--line-dark);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+}
+footer{
+  border-top:1px solid var(--line);
+  padding:18px 0 32px;
+  color:var(--muted);
+  font-size:.75rem;
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+}
+
+@media(max-width:1180px){
+  .hero{
+    grid-template-columns:minmax(0,.84fr) minmax(590px,1.16fr);
+  }
+  .hero-map-card img{height:330px}
+}
+@media(max-width:980px){
+  .hero{
+    grid-template-columns:1fr;
+    width:min(100% - 24px,900px);
+  }
+  .hero-map-card img{height:390px}
+  .workflow{grid-template-columns:1fr 1fr}
+  .workflow-step:nth-child(2){border-right:0}
+  .workflow-step:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media(max-width:720px){
+  .wrap,.hero{width:calc(100% - 24px)}
+  .nav-link{display:none}
+  .hero-map-slider{
+    grid-template-columns:32px minmax(0,1fr) 32px;
+    gap:5px;
+    padding:7px;
+  }
+  .hero-slide{width:30px;height:30px;font-size:1.3rem}
+  .hero-map-track{gap:0}
+  .hero-map-card{flex:0 0 100%;width:100%}
+  .hero-map-card img{height:auto;max-height:480px}
+  .hero-left-summary{grid-template-columns:1fr}
+  .hero-left-summary-item,
+  .hero-left-summary-item:nth-child(2),
+  .hero-left-summary-item:nth-child(3){
+    grid-column:auto;
+    padding:10px 0;
+    border-left:0;
+  }
+  .hero-left-summary-item + .hero-left-summary-item{border-top:1px solid var(--line)}
+  .project-context,.contribution-grid,.workflow{grid-template-columns:1fr}
+  .context-block + .context-block{border-left:0;border-top:1px solid var(--line);padding-left:0}
+  .workflow-step{border-right:0;border-bottom:1px solid var(--line);margin:0;padding:14px 0}
+  .outcome{grid-template-columns:1fr}
+  .back,footer{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../../index.html">Fariha Aktar</a>
+    <div class="nav-actions">
+      <a class="nav-link" href="../../index.html#research">Research</a>
+      <a class="nav-link" href="../../index.html#projects">Projects</a>
+      <a class="nav-link" href="../../index.html#publication">Publication</a>
+      <a class="btn" href="../../index.html">← Portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">Applied Project · Habitat Mapping · 2025</div>
+
+    <h1>Habitat Map of Cox's Bazar, Maheshkhali Island and Kutubdia</h1>
+
+    <p class="hero-copy">
+      Habitat mapping prepared as part of the Master Plan Preparation of Cox's Bazar District,
+      combining field verification, satellite interpretation and secondary information to
+      document local resources, land uses, livelihoods and potential habitats for flora and fauna.
+    </p>
+
+    <div class="hero-focus-line">
+      <strong>Objective</strong>
+      <span>
+        Visualize the existing local resource base, land-use pattern, livelihood activities
+        and potential habitat areas to support environmental considerations within the district master plan.
+      </span>
+    </div>
+
+    <div class="hero-left-summary">
+      <div class="hero-left-summary-item">
+        <small>Year</small>
+        <strong>2025</strong>
+      </div>
+
+      <div class="hero-left-summary-item">
+        <small>Areas mapped</small>
+        <strong>Cox's Bazar · Maheshkhali Island · Kutubdia</strong>
+      </div>
+
+      <div class="hero-left-summary-item">
+        <small>Approach</small>
+        <strong>Field Survey · Satellite Data · Secondary Data · Habitat Mapping</strong>
+      </div>
+    </div>
+  </div>
+
+  <aside class="hero-map-panel">
+    <div class="hero-map-head">
+      <div>
+        <div class="eyebrow">Project outputs</div>
+        <strong>Habitat Maps</strong>
+      </div>
+      <div class="hero-map-count" id="heroMapCount">1 / 2</div>
+    </div>
+
+    <div class="hero-map-slider">
+      <button class="hero-slide" id="heroPrev" type="button" aria-label="Previous maps">‹</button>
+
+      <div class="hero-map-viewport">
+        <div class="hero-map-track" id="heroMapTrack">
+
+          <button class="hero-map-card image-expand"
+                  data-image="images/COX'S BAZAR 1.jpg"
+                  data-title="Cox's Bazar Habitat Map">
+            <img src="images/COX'S BAZAR 1.jpg" alt="Habitat map of Cox's Bazar">
+            <span>
+              <strong>Cox's Bazar</strong>
+              <small>Habitat and local-resource mapping prepared for the master-plan study area.</small>
+            </span>
+          </button>
+
+          <button class="hero-map-card image-expand"
+                  data-image="images/KUTUBDIA.jpg"
+                  data-title="Kutubdia Habitat Map">
+            <img src="images/KUTUBDIA.jpg" alt="Habitat map of Kutubdia">
+            <span>
+              <strong>Kutubdia</strong>
+              <small>Spatial representation of local resources, land uses and habitat features.</small>
+            </span>
+          </button>
+
+          <button class="hero-map-card image-expand"
+                  data-image="images/MAHESHKHALI.jpg"
+                  data-title="Maheshkhali Island Habitat Map">
+            <img src="images/MAHESHKHALI.jpg" alt="Habitat map of Maheshkhali Island">
+            <span>
+              <strong>Maheshkhali Island</strong>
+              <small>Habitat mapping integrating field observations with satellite and secondary information.</small>
+            </span>
+          </button>
+
+        </div>
+      </div>
+
+      <button class="hero-slide" id="heroNext" type="button" aria-label="Next maps">›</button>
+    </div>
+  </aside>
+</header>
+
+<section class="section wrap">
+  <div class="section-head">
+    <div class="eyebrow">Project context</div>
+    <h2>Environmental mapping for district master planning</h2>
+  </div>
+
+  <div class="project-context">
+    <div class="context-block">
+      <div class="eyebrow">Master plan</div>
+      <p>
+        The habitat-mapping task formed part of the <strong>Master Plan Preparation of Cox's Bazar District</strong>,
+        initiated by the Cox's Bazar Development Authority. Habitat mapping was included within the
+        environmental scope of the planning assignment.
+      </p>
+    </div>
+
+    <div class="context-block">
+      <div class="eyebrow">Team structure</div>
+      <p>
+        The work was undertaken under the supervision of environmental expert
+        <strong>Dr. Kazi Ahsan Habib</strong>. I contributed as part of the mapping team responsible
+        for preparing habitat maps for Cox's Bazar, Maheshkhali Island and Kutubdia.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="section-head">
+    <div class="eyebrow">Project workflow</div>
+    <h2>From field verification to final habitat maps</h2>
+  </div>
+
+  <div class="workflow">
+    <div class="workflow-step">
+      <span class="number">01</span>
+      <strong>Satellite & secondary data</strong>
+      <p>Existing spatial and environmental information was reviewed to identify land-use and habitat features.</p>
+    </div>
+
+    <div class="workflow-step">
+      <span class="number">02</span>
+      <strong>Three-day field survey</strong>
+      <p>Field observations were used to validate satellite interpretation and collect primary information.</p>
+    </div>
+
+    <div class="workflow-step">
+      <span class="number">03</span>
+      <strong>Habitat-map preparation</strong>
+      <p>Local resources, land uses, livelihoods and potential flora/fauna habitats were translated into map outputs.</p>
+    </div>
+
+    <div class="workflow-step">
+      <span class="number">04</span>
+      <strong>Review & master-plan integration</strong>
+      <p>The generated maps were reviewed by a committee before incorporation into the master-plan process.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="section-head">
+    <div class="eyebrow">My contribution</div>
+    <h2>Applied geospatial and field-based work</h2>
+  </div>
+
+  <div class="contribution-grid">
+    <article class="contribution">
+      <div class="eyebrow">Fieldwork</div>
+      <strong>Ground verification</strong>
+      <p>Participated in field surveys to validate mapped features and collect location-specific environmental information.</p>
+    </article>
+
+    <article class="contribution">
+      <div class="eyebrow">Spatial analysis</div>
+      <strong>Habitat interpretation</strong>
+      <p>Supported interpretation of satellite and secondary information to represent local resources, land uses and habitat conditions.</p>
+    </article>
+
+    <article class="contribution">
+      <div class="eyebrow">Mapping</div>
+      <strong>Final cartographic outputs</strong>
+      <p>Contributed to preparation of the three habitat maps used for professional review and master-plan documentation.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="outcome">
+    <strong>Project outcome</strong>
+    <p>
+      Three habitat maps were produced for Cox's Bazar, Maheshkhali Island and Kutubdia.
+      The outputs were reviewed as part of the professional planning process before being
+      incorporated into the Cox's Bazar District master-plan work.
+    </p>
+  </div>
+</section>
+
+<section class="wrap back">
+  <div>
+    <div class="eyebrow">Continue exploring</div>
+    <h2>Return to the project portfolio</h2>
+  </div>
+  <a class="btn primary" href="../../index.html#projects">← Back to Projects</a>
+</section>
+
+<footer class="wrap">
+  <span>Fariha Aktar · Applied Project · 2025</span>
+  <span>Habitat Mapping · Field Survey · GIS · Environmental Planning</span>
+</footer>
+
+</main>
+
+<div class="image-modal" id="imageModal">
+  <div class="image-dialog">
+    <div class="image-bar">
+      <div class="image-title" id="imageTitle">Project output</div>
+      <button class="image-close" id="imageClose" aria-label="Close image">×</button>
+    </div>
+    <div class="image-stage">
+      <img id="imageView" src="" alt="">
+    </div>
+  </div>
+</div>
+
+<script>
+const heroMapTrack=document.getElementById("heroMapTrack");
+const heroPrev=document.getElementById("heroPrev");
+const heroNext=document.getElementById("heroNext");
+const heroMapCount=document.getElementById("heroMapCount");
+let heroMapPage=0;
+
+function heroMapsPerView(){
+  return window.innerWidth<=720 ? 1 : 2;
+}
+
+function updateHeroMapSlider(){
+  const cards=[...heroMapTrack.querySelectorAll(".hero-map-card")];
+  const perView=heroMapsPerView();
+  const totalPages=Math.ceil(cards.length/perView);
+
+  heroMapPage=Math.max(0,Math.min(heroMapPage,totalPages-1));
+
+  if(perView===1){
+    heroMapTrack.style.transform=`translateX(-${heroMapPage*100}%)`;
+  }else{
+    const viewport=heroMapTrack.parentElement.clientWidth;
+    const gap=14;
+    const cardWidth=(viewport-gap)/2;
+    const shift=heroMapPage*2*(cardWidth+gap);
+    heroMapTrack.style.transform=`translateX(-${shift}px)`;
+  }
+
+  heroPrev.disabled=heroMapPage===0;
+  heroNext.disabled=heroMapPage>=totalPages-1;
+  heroMapCount.textContent=`${heroMapPage+1} / ${totalPages}`;
+}
+
+heroPrev.addEventListener("click",e=>{
+  e.stopPropagation();
+  if(heroMapPage>0){
+    heroMapPage--;
+    updateHeroMapSlider();
+  }
+});
+
+heroNext.addEventListener("click",e=>{
+  e.stopPropagation();
+  const totalPages=Math.ceil(
+    heroMapTrack.querySelectorAll(".hero-map-card").length/heroMapsPerView()
+  );
+  if(heroMapPage<totalPages-1){
+    heroMapPage++;
+    updateHeroMapSlider();
+  }
+});
+
+window.addEventListener("resize",updateHeroMapSlider);
+window.addEventListener("load",updateHeroMapSlider);
+updateHeroMapSlider();
+
+const imageModal=document.getElementById("imageModal");
+const imageView=document.getElementById("imageView");
+const imageTitle=document.getElementById("imageTitle");
+const imageClose=document.getElementById("imageClose");
+
+document.querySelectorAll(".image-expand").forEach(el=>{
+  el.addEventListener("click",()=>{
+    imageView.src=el.dataset.image;
+    imageTitle.textContent=el.dataset.title || "Project output";
+    imageModal.classList.add("open");
+    document.body.style.overflow="hidden";
+  });
+});
+
+function closeModal(){
+  imageModal.classList.remove("open");
+  imageView.src="";
+  document.body.style.overflow="";
+}
+
+imageClose.addEventListener("click",closeModal);
+imageModal.addEventListener("click",e=>{
+  if(e.target===imageModal) closeModal();
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape" && imageModal.classList.contains("open")) closeModal();
+});
+</script>
+
+</body>
+</html>
